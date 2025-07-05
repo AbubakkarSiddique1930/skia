@@ -43,7 +43,7 @@ enum SkPathOp {
                   inputs.
     @return True if the operation succeeded.
   */
-bool SK_API Op(const SkPath& one, const SkPath& two, SkPathOp op, SkPath* result);
+bool __declspec(dllexport) Op(const SkPath& one, const SkPath& two, SkPathOp op, SkPath* result);
 
 /** Set this path to a set of non-overlapping contours that describe the
     same area as the original path.
@@ -57,7 +57,7 @@ bool SK_API Op(const SkPath& one, const SkPath& two, SkPathOp op, SkPath* result
     @param result The simplified path. The result may be the input.
     @return True if simplification succeeded.
   */
-bool SK_API Simplify(const SkPath& path, SkPath* result);
+bool __declspec(dllexport) Simplify(const SkPath& path, SkPath* result);
 
 /** Set the resulting rectangle to the tight bounds of the path.
 
@@ -87,11 +87,11 @@ static inline bool TightBounds(const SkPath& path, SkRect* result) {
     @param result The equivalent path with fill type set to winding.
     @return True if winding path was set.
   */
-bool SK_API AsWinding(const SkPath& path, SkPath* result);
+bool __declspec(dllexport) AsWinding(const SkPath& path, SkPath* result);
 
 /** Perform a series of path operations, optimized for unioning many paths together.
   */
-class SK_API SkOpBuilder {
+class __declspec(dllexport) SkOpBuilder {
 public:
     /** Add one or more paths and their operand. The builder is empty before the first
         path is added, so the result of a single add is (emptyPath OP path).
@@ -99,7 +99,7 @@ public:
         @param path The second operand.
         @param _operator The operator to apply to the existing and supplied paths.
      */
-    void add(const SkPath& path, SkPathOp _operator);
+    void __declspec(dllexport) add(const SkPath& path, SkPathOp _operator);
 
     /** Computes the sum of all paths and operands, and resets the builder to its
         initial state.
@@ -107,15 +107,15 @@ public:
         @param result The product of the operands.
         @return True if the operation succeeded.
       */
-    bool resolve(SkPath* result);
+    bool __declspec(dllexport) resolve(SkPath* result);
 
 private:
     skia_private::TArray<SkPath> fPathRefs;
     SkTDArray<SkPathOp> fOps;
 
-    static bool FixWinding(SkPath* path);
-    static void ReversePath(SkPath* path);
-    void reset();
+    static bool __declspec(dllexport) FixWinding(SkPath* path);
+    static void __declspec(dllexport) ReversePath(SkPath* path);
+    void __declspec(dllexport) reset();
 };
 
 #endif
